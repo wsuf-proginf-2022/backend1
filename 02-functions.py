@@ -1,3 +1,5 @@
+import time
+import functools
 
 def my_first_function():
   pass
@@ -73,3 +75,54 @@ def print_user(person, **kwargs):
     print(f"{key}: {value}")
 
 print_user('the person', name="Peter", age=30, city="Berlin")
+
+def my_function():
+  num_list = []
+  for num in range(1, 100000):
+    num_list.append(num)
+  print("the sum of all numbers is: {}".format(sum(num_list)))
+
+def timing_function(callback):
+  @functools.wraps(callback)
+  def wrapper():
+    t1 = time.time()
+    callback()
+    t2 = time.time()
+    result = "Time it took to run the function: " + str((t2 - t1)) + " seconds"
+    print(result)
+  return wrapper
+
+wrapped_function = timing_function(my_function)
+wrapped_function()
+
+@timing_function
+def my_sum():
+  num_list = []
+  for num in range(1, 100000):
+    num_list.append(num)
+  print("the sum of all numbers is: {}".format(sum(num_list)))
+
+my_sum()
+print(my_sum.__name__)
+
+
+x = [1, 2, 3, 4, 5]
+out = []
+for item in x:
+  out.append(item**2)
+print(out)
+
+# list comprehension
+out = [item**2 for item in x]
+
+users = [('Bob', 42, 'Mechanic'), ('James', 24, 'Artist'), ('Harry', 32, 'Lecturer')]
+
+# dictionary comprehension
+user_mapping = { user[0]: user for user in users }
+
+print(user_mapping)
+
+user_mapping2 = {}
+for user in users:
+  user_mapping2[user[0]] = user
+

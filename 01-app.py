@@ -92,4 +92,5 @@ def say_hello2(name: str, x,y) -> str:
   """
   return f'Hello {name}'
 
+print(say_hello2('John', 2, 3))
 print(say_hello2(name='John', x=2, y=3))
